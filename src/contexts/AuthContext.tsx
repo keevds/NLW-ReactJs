@@ -1,12 +1,12 @@
 import { createContext, ReactNode, useState, useEffect } from 'react'
 import { auth, firebase } from '../services/firebase'
 
+// Types
 type User = {
     name: string
     id: string
     avatar: string
 }
-
 type AuthContextType = {
     user: User | undefined
     signWithGoogle: () => Promise<void>
@@ -14,13 +14,15 @@ type AuthContextType = {
 
 export const AuthContext = createContext({} as AuthContextType)
 
+//Types do Children
 type AuthContextProviderProps = {
     children: ReactNode
 }
 
 export function AuthContextProvider(props: AuthContextProviderProps) {
-    const [user, setUser] = useState<User>()
+    const [user, setUser] = useState<User>() //
 
+    //Guarda as as infos do usuário
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
             if (user) {
@@ -37,12 +39,12 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
                 })
             }
         })
-
         return () => {
             unsubscribe()
         }
     }, [])
 
+    //Pega as infos do Firebase e coloca no User
     async function signWithGoogle() {
         const provider = new firebase.auth.GoogleAuthProvider()
 

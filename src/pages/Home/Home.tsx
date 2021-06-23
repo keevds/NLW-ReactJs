@@ -18,8 +18,9 @@ import { Button } from '../../components/Button/Button'
 
 export function Home() {
     const history = useHistory()
-    const { user, signWithGoogle } = useAuth()
+    const { user, signWithGoogle } = useAuth() //Pego o user do UseAuth
 
+    //Executa a signWithGoogle depois do click
     async function handleCreateRoom() {
         if (!user) {
             await signWithGoogle()
