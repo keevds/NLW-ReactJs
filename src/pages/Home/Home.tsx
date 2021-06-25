@@ -8,14 +8,7 @@ import illustrationImg from '../../assets/images/illustration.svg'
 import logoImg from '../../assets/images/logo.svg'
 import googleIconImg from '../../assets/images/google-icon.svg'
 
-import {
-    Container,
-    LeftContent,
-    RightContainer,
-    RightContent,
-    Separator,
-    CreateRoom,
-} from './Style'
+import { Container, LeftContent, RightContainer, RightContent, Separator, CreateRoom } from './Style'
 
 import { Button } from '../../components/Button/Button'
 
@@ -36,7 +29,7 @@ export function Home() {
     async function handleJoinRoom(event: FormEvent) {
         event.preventDefault()
 
-        if (roomCode.trim() == '') {
+        if (roomCode.trim() === '') {
             return
         }
 
@@ -47,16 +40,18 @@ export function Home() {
             return
         }
 
+        if (roomRef.val().endedAt) {
+            alert('Room already closed.')
+            return
+        }
+
         history.push(`rooms/${roomCode}`)
     }
 
     return (
         <Container>
             <LeftContent>
-                <img
-                    src={illustrationImg}
-                    alt="Ilustração simbolizando perguntas e respostas "
-                />
+                <img src={illustrationImg} alt="Ilustração simbolizando perguntas e respostas " />
                 <strong>Crie salas de Q&amp;A ao-vivo</strong>
                 <p>Tire as dúvidas da sua audiência em tempo-real</p>
             </LeftContent>
@@ -72,9 +67,7 @@ export function Home() {
                         <input
                             type="text"
                             placeholder="Digite o código da sala"
-                            onChange={(event) =>
-                                setRoomCode(event.target.value)
-                            }
+                            onChange={(event) => setRoomCode(event.target.value)}
                             value={roomCode}
                         />
                         <Button type="submit">Entrar na sala</Button>

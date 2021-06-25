@@ -29,10 +29,23 @@ export const Botao = styled.button`
         opacity: 0.6;
         cursor: not-allowed;
     }
+
+    &.outlined {
+        background: #fff;
+        color: #835afd;
+        border: 1px solid #835afd;
+    }
 `
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+    isOutlined?: boolean
+}
 
-export function Button(props: ButtonProps) {
-    return <Botao {...props} />
+export function Button({ isOutlined = false, ...props }: ButtonProps) {
+    return (
+        <Botao
+            className={`button ${isOutlined ? 'outlined' : ''}`}
+            {...props}
+        />
+    )
 }

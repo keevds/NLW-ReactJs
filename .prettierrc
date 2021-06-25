@@ -1,5 +1,8 @@
 {
-    "singleQuote": true,
-    "tabWidth": 4,
-    "semi": false
+  "singleQuote": true,
+  "tabWidth": 4,
+  "semi": false,
+  "jsxBracketSameLine": true,
+  "proseWrap": "never",
+  "printWidth": 120
 }
